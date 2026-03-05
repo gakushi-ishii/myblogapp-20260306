@@ -1,0 +1,33 @@
+@model MyBlogApp.Models.BlogPost
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Blog" asp-action="Index">ブログ一覧</a></li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <article class="mt-4">
+        <h1 class="mb-3">@Model.Title</h1>
+        <div class="text-muted mb-4">
+            <span>✍️ @Model.Author</span>
+            <span class="ms-3">📅 @Model.PublishedAt.ToString("yyyy年MM月dd日")</span>
+        </div>
+        <div class="mb-3">
+            @foreach (var tag in Model.Tags)
+            {
+                <span class="badge bg-primary me-1">@tag</span>
+            }
+        </div>
+        <hr />
+        <div class="fs-5 lh-lg" style="white-space: pre-line;">@Model.Content</div>
+    </article>
+
+    <div class="mt-5">
+        <a asp-controller="Blog" asp-action="Index" class="btn btn-secondary">← 一覧に戻る</a>
+    </div>
+</div>
